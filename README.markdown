@@ -1,6 +1,6 @@
 # Movie Recommendation System Backend
 
-This repository contains the backend implementation for a Movie Recommendation System, developed as part of a Web Engineering project at FAST – National University of Computer & Emerging Sciences, Islamabad Campus. Built using **Express.js** and **MongoDB**, it supports user authentication, movie management, ratings, reviews, personalized recommendations, and more. The API is documented using Postman, adhering to best practices for file structure, naming conventions, and middleware usage.
+This repository contains the backend implementation for a Movie Recommendation System. Built using **Express.js** and **MongoDB**, it supports user authentication, movie management, ratings, reviews, personalized recommendations, and more. The API is documented using Postman, adhering to best practices for file structure, naming conventions, and middleware usage.
 
 ## Project Overview
 
@@ -22,10 +22,7 @@ The Movie Recommendation System enables users to browse, rate, and review movies
 │   ├── middleware/         # Authentication and error-handling middleware
 │   ├── models/             # MongoDB schemas (User, Movie, Review, etc.)
 │   ├── routes/             # Express route definitions
-│   ├── utils/              # Utility functions (e.g., recommendation logic)
-│   ├── config/             # Configuration files (e.g., database, environment)
-│   └── app.js              # Main application entry point
-├── postman/                # Postman API collection
+│   └── index.js              # Main application entry point
 ├── .env                    # Environment variables
 ├── package.json            # Project dependencies and scripts
 └── README.md               # Project documentation
@@ -79,69 +76,6 @@ The Movie Recommendation System enables users to browse, rate, and review movies
 ### 11. Admin Operations
 - **Database Management**: Manage movies and reviews.
 - **Analytics**: View site stats (popular movies, trending genres, user engagement).
-
-## Database Schemas
-
-### User Schema
-```javascript
-{
-  username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  preferences: {
-    genres: [String],
-    actors: [String]
-  },
-  wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
-  customLists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }],
-  followedLists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }]
-}
-```
-
-### Movie Schema
-```javascript
-{
-  title: { type: String, required: true },
-  genre: [String],
-  director: String,
-  cast: [String],
-  releaseDate: Date,
-  runtime: Number,
-  synopsis: String,
-  averageRating: Number,
-  trivia: [String],
-  goofs: [String],
-  soundtrack: [String],
-  ageRating: String,
-  boxOffice: {
-    openingWeekend: Number,
-    totalEarnings: Number,
-    international: Number
-  },
-  awards: [{ name: String, year: Number }]
-}
-```
-
-### Review Schema
-```javascript
-{
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' },
-  rating: { type: Number, min: 1, max: 5 },
-  reviewText: String,
-  createdAt: Date
-}
-```
-
-### List Schema
-```javascript
-{
-  name: String,
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  movies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
-  isPublic: Boolean
-}
-```
 
 **Relationships**:
 - Users reference Movies in `wishlist` and `customLists`.
@@ -251,8 +185,6 @@ Use Postman for API testing:
 MIT License - see `LICENSE` for details.
 
 ## Contact
-- **Institution**: FAST-NUCES, Islamabad Campus
-- **Course**: Web Engineering
 - **Resources**:
   - [Postman Documentation](https://learning.postman.com/docs/publishing-your-api/api-documentation-overview/)
   - [Postman API Testing Tutorial](https://www.youtube.com/watch?v=VywxIQ2ZXw4)
